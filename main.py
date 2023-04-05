@@ -32,6 +32,12 @@ def load_lyrics(filename, artistName, numSongs):
         file.write(tempNameGone)
     file.close()
 
+# Shuts down the program
+def closeProgram():
+    printer.printASCII(-1)
+    print("Thank you for using GoatGen!")
+    sys.exit("All gone!")
+
 # Prompts to begin the webscraper
 def webScrapePrompt():
     print("IMPORTANT: You must have your own Genius access token to access the API used for gathering the lyrics. Paste the token code into /lyrics/token.txt")
@@ -52,13 +58,16 @@ def webScrapePrompt():
 
 # Prompts for opening files, retries until the user selects or creates a valid file
 def fileOpenPrompt():
-    fileToOpen = 'lyrics/' + input("Enter the file name to open ")
+    userInput = input("Enter the file name to open (or 'exit' to quit) ")
+    fileToOpen = 'lyrics/' + userInput
     while (not os.path.isfile(fileToOpen)):
-        userInput = input("File does not exist! Enter again, or type 'add' to create new file ")
+        if (userInput == 'exit'):
+            closeProgram()
         if (userInput == 'add'):
             fileToOpen = webScrapePrompt()
         else:
-            fileToOpen = 'lyrics/' + input("Enter the file name to open ")
+            userInput = input("File does not exist! Enter again, or type 'add' to create new file (or 'exit' to quit) ")
+            fileToOpen = 'lyrics/' + userInput
     return fileToOpen
 
 # Prompts for generating rhymes
@@ -77,8 +86,10 @@ def rhymePrompt():
             rhymeMaker.createRhyme(numLines, startLine)
 
 if __name__ == '__main__':
+    printer = ASCIIPrinter.ASCIIPrint()
+    printer.printASCII(1)
+    printer.printASCII(2)
 
-    #load_lyrics('test', 'The Mountain Goats', 3)
     fileToOpen = fileOpenPrompt()
     print("Opening file " + fileToOpen + "...")
     file = open(fileToOpen, "r")
@@ -88,14 +99,9 @@ if __name__ == '__main__':
     lines = data.splitlines()
 
     print("Initializing rhyme maker...")
-    printer = ASCIIPrinter.ASCIIPrint()
-    printer.printASCII(1)
-    printer.printASCII(2)
     rhymeMaker = generateRhyme.GenerateRhyme(lines)
 
     rhymePrompt()
 
     file.close()
-    printer.printASCII(-1)
-    print("Thank you for using GoatGen!")
-    sys.exit("All gone!")
+    closeProgram()

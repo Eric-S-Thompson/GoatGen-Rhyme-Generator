@@ -44,7 +44,7 @@ def webScrapePrompt():
     if(os.path.isfile('lyrics/token.txt')):
         file = open('lyrics/token.txt')
         data = file.read()
-        print("token: " + data)
+        #print("token: " + data)
         global GENIUS_ACCESS_TOKEN
         GENIUS_ACCESS_TOKEN = data
     else:
@@ -58,7 +58,7 @@ def webScrapePrompt():
 
 # Prompts for opening files, retries until the user selects or creates a valid file
 def fileOpenPrompt():
-    userInput = input("Enter the file name to open (or 'exit' to quit) ")
+    userInput = input("Enter the file name to open, or type 'add' to create new file (or 'exit' to quit) ")
     fileToOpen = 'lyrics/' + userInput
     while (not os.path.isfile(fileToOpen)):
         if (userInput == 'exit'):

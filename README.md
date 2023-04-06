@@ -5,7 +5,8 @@
   
 Can generate rhymes on its own or be given a rhyming scheme (I.E. ABBAB) which it will then try to follow.
 
-# Instructions
+# Instructions  
+Requires an installation of Python 3. From there navigate to the project folder from your terminal.  
 ### Installations needed
 *pip install pronouncing*  
 *pip install lyricsgenius*  
@@ -17,11 +18,11 @@ Can generate rhymes on its own or be given a rhyming scheme (I.E. ABBAB) which i
 ## Webscraper
 - Uses the Genius API to scrape lyrics into a file. Requires you to have your own token (See: https://docs.genius.com/)  
 - Paste your token into /lyrics/token.txt
-- File is saved in /lyrics/ 
+- Lyric files are saved in /lyrics/ 
 ![scraper](images/2-GoatScraper.PNG)
 ## Generator  
 - Reads in a file specified by the user, searching in the /lyrics/ folder  
-- Add any text file you wish, just have each part separated by a newline   
+- To add your own files simply place them in /lyrics/, formatted so that each verse is separated by a newline  
 - A pre-loaded lyric file called goatLyrics, containing 9000 lines of songs by The Mountain Goats, is included by default
 - Has two modes: Normal and Rhyme Scheme  
 ### Normal Mode
